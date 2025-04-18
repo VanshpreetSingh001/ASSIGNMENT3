@@ -1,0 +1,73 @@
+class RequisitionSystem:
+    def __init__(self):
+        self.count = 10000
+
+    def staff_info(self):
+        print("Printing Requisitions:")
+        while True:
+            date = input("Date (dd/mm/yyyy): ")
+            staff_id = input("Staff ID: ")
+            staff_name = input("Staff Name: ")
+            self.count += 1
+            print("Requisition ID:", self.count)
+            print("PLEASE REMBER THE REQUISITION ID ASSIGNED TO YOU ")
+
+            again = input("Do you want to enter another? (yes/no): ")
+            if again.lower() != "yes":
+                break
+system = RequisitionSystem()
+system.staff_info()
+
+class Requisitionsystem:
+    def requisition_total(self):
+        total_price = 0
+        while True:
+            product = input("Enter product name (or type 'done' to finish): ")
+            if product.lower() == "done":
+                break
+            try:
+                price = int(input(f"Enter price for {product}: $"))
+                total_price += price
+            except ValueError:
+                print("Invalid input. Skipping.")
+        print("Requisition total = $" + str(total_price))
+        return total_price
+    
+system = Requisitionsystem()
+system.requisition_total()
+
+def check_approval_status():
+    total_requisitions = int(input("Enter the number of requisitions you want to submit (This should be exactly the same number as REQUISITION ID'S assigned) : "))
+    
+    approved_count = 0
+    pending_count = 0
+    not_approved_count = 0
+
+    for i in range(total_requisitions):
+        print(f"\nProcessing requisition {i + 1}:")
+        total = int(input("Enter the total amount of the products for each requisition = "))
+        
+        if total <= 500:
+            print("Status = Approved")
+            staff_id = input("Enter the staff ID = ")
+            requisition_id = input("Enter the requisition ID = ")
+            approval_reference_number = staff_id + requisition_id[-3:]
+            print("Your approval reference number is = " + approval_reference_number)
+            approved_count += 1
+        elif total <= 1000:
+            print("Status = Pending")
+            print("Approval reference number is not available")
+            pending_count += 1
+        else:
+            print("Status = Not Approved")
+            print("Approval reference number is not available")
+            not_approved_count += 1
+
+    print("\nStatistics:")
+    print("Displaying the Requisition Statistics")
+    print("The total number of requisitions submitted:", total_requisitions)
+    print("The total number of approved requisitions:", approved_count)
+    print("The total number of pending requisitions:", pending_count)
+    print("The total number of not approved requisitions:", not_approved_count)
+
+check_approval_status()
